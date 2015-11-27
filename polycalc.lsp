@@ -85,6 +85,15 @@
     ;; and try to match it with next var in the term
     (t (cons (car t1) (var*term v1 (cdr t1))))))
 
+
+;;;; SUBTRACTING POLYNOMIALS
+;;; poly-: Subtracts the second polynomial from the first
+;;; p1: the first polynomial
+;;; p2: the second polynomial
+(defun poly- (p1 p2)
+  ;; add first polynomial with the second multiplied by -1
+  (poly+ p1 (poly* '((-1)) p2)))
+
 (print 
   ;(poly+ '( (2) ) '( (1) ))
   ;(poly+ '( (2(x 1)) ) '( (2(y 2)) ))
@@ -95,6 +104,13 @@
   ;(poly* '( (2) ) '( (4) ))
   ;(poly* '( (2(x 1)) ) '( (2(y 2)) ))
   ;(poly* '( (2(x 1)) ) '( (2(x 1)) ))
-  (poly* '( (1(x 1)) (1(y 1)) ) '( (1(x 1)) (1(y 1)) ))
+  ;(poly* '( (1(x 1)) (1(y 1)) ) '( (1(x 1)) (1(y 1)) ))
   ;(poly* '( (2(x 1)(y 1)) (3(x 1)) ) '( (1(x 1)) (2(z 3)) (3(x 1)(y 1)) ))
+
+  ;(poly- '( (2) ) '( (1) ))
+  ;(poly- '( (2(x 1)) ) '( (2(y 2)) ))
+  ;(poly- '( (2(x 1)) ) '( (2(x 1)) ))
+  ;(poly- '( (1(x 1)) (1(y 1)) ) '( (1(x 1)) (1(y 1)) ))
+  (poly- '( (2(x 1)(y 1)) (3(x 1)) ) '( (1(x 1)) (2(z 3)) (3(x 1)(y 1)) ))
 )
+
