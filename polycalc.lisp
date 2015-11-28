@@ -96,6 +96,7 @@
 ;;;   http://www.cs.toronto.edu/~dianaz/Example_LispPart1.html
 (defun bubble-sort (t1)
   (cond
+    ((null t1) t1)
     ;; if the first term is an atom (coeff) append it to the start
     ;; and sort the rest of the term
     ((atom (car t1)) (cons (car t1) (bubble-sort (cdr t1))))
@@ -118,7 +119,7 @@
   (map 'list #'bubble-sort p1))
 
 (print 
-  ;(poly+ '( (2) ) '( (1) ))
+  (poly+ '( (2) ) '( (1) ))
   ;(poly+ '( (2(x 1)) ) '( (2(y 2)) ))
   ;(poly+ '( (2(x 1)) ) '( (2(x 1)) ))
   ;(poly+ '( (1(x 1)) (1(y 1)) ) '( (1(x 1)) (1(y 1)) ))
@@ -127,7 +128,7 @@
   ;(poly* '( (2) ) '( (4) ))
   ;(poly* '( (2(x 1)) ) '( (2(y 2)) ))
   ;(poly* '( (2(x 1)) ) '( (2(x 1)) ))
-  (poly* '( (1(x 1)) (1(y 1)) ) '( (1(x 1)) (1(y 1)) ))
+  ;(poly* '( (1(x 1)) (1(y 1)) ) '( (1(x 1)) (1(y 1)) ))
   ;(poly* '( (2(x 1)(y 1)) (3(x 1)) ) '( (1(x 1)) (2(z 3)) (3(x 1)(y 1)) ))
 
   ;(poly- '( (2) ) '( (1) ))
