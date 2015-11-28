@@ -3,12 +3,22 @@
 ;;; p1: the first polynomial
 ;;; p2: the second polynomial
 (defun poly+ (p1 p2)
+  ;; let p1 be the fist term in p1
+  ;; and p2 be p2 appended to the rest of p1
+  (let ((p1 (list (car p1)))
+        (p2 (append (cdr p1) p2)))
+    (collect p1 p2)))
+
+;;; collect: adds terms from p2 to p1
+;;; p1: the first polyomial, initially only containing one term
+;;; p2: the second polynomial, initially containing the rest of the terms
+(defun collect (p1 p2)
   (cond 
     ;; base case if p2 is null return p1
     ((null p2) p1)
     ;; add the first term of p2 to p1 
-    ;; and call poly+ on the result and the rest of p2
-    (t (poly+ (term+poly (car p2) p1) (cdr p2)))))
+    ;; and call collect on the result and the rest of p2
+    (t (collect (term+poly (car p2) p1) (cdr p2)))))
 
 ;;; term+poly: adds a term to a polynomial and returns the result
 ;;; t1: the term
@@ -98,7 +108,7 @@
   ;(poly+ '( (2) ) '( (1) ))
   ;(poly+ '( (2(x 1)) ) '( (2(y 2)) ))
   ;(poly+ '( (2(x 1)) ) '( (2(x 1)) ))
-  ;(poly+ '( (1(x 1)) (1(y 1)) ) '( (1(x 1)) (1(y 1)) ))
+  (poly+ '( (1(x 1)) (1(y 1)) ) '( (1(x 1)) (1(y 1)) ))
   ;(poly+ '( (2(x 1)(y 1)) (3(x 1)) ) '( (1(x 1)) (2(z 3)) (3(x 1)(y 1)) ))
 
   ;(poly* '( (2) ) '( (4) ))
@@ -111,6 +121,6 @@
   ;(poly- '( (2(x 1)) ) '( (2(y 2)) ))
   ;(poly- '( (2(x 1)) ) '( (2(x 1)) ))
   ;(poly- '( (1(x 1)) (1(y 1)) ) '( (1(x 1)) (1(y 1)) ))
-  (poly- '( (2(x 1)(y 1)) (3(x 1)) ) '( (1(x 1)) (2(z 3)) (3(x 1)(y 1)) ))
+  ;(poly- '( (2(x 1)(y 1)) (3(x 1)) ) '( (1(x 1)) (2(z 3)) (3(x 1)(y 1)) ))
 )
 
