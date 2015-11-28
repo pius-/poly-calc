@@ -5,7 +5,7 @@
 ;;;; 
 ;;;; REPRESENTATION
 ;;;; 3x^2 + 4x - 1 
-;;;;'( (3(x 2)) (4(x 1)) (-1) )
+;;;; '( (3(x 2)) (4(x 1)) (-1) )
 
 ;;;; ADDING POLYNOMIALS
 ;;; poly+: adds two polynomials and returns the result
@@ -35,7 +35,9 @@
 ;;; N.B. assumes the terms have the same variables
 (defun term+term (t1 t2)
   ;; add the coefficients together and appends the variable to the end
-  (cons (+ (car t1) (car t2)) (cdr t1)))
+  (if (equal 0 (+ (car t1) (car t2))) 
+    '(0)
+    (cons (+ (car t1) (car t2)) (cdr t1))))
 
 ;;;; MULTIPLYING POLYNOMIALS
 ;;; poly* multiplies the first poly by second and returns the result
@@ -137,4 +139,3 @@
   ;(poly- '( (1(x 1)) (1(y 1)) ) '( (1(x 1)) (1(y 1)) ))
   ;(poly- '( (2(x 1)(y 1)) (3(x 1)) ) '( (1(x 1)) (2(z 3)) (3(x 1)(y 1)) ))
   )
-
