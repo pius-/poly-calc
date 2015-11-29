@@ -24,18 +24,22 @@
 
 ;;; term+poly: adds a term to a polynomial and returns the result
 (defun term+poly (t1 p1)
-  (cond
-    ((null p1) (list t1))
-    ;; if the first term of p1 matches t1 add them together
-    ((equal (cdar p1) (cdr t1)) (cons (term+term (car p1) t1) (cdr p1)))
-    ;; if they don't match append the term to the start of the result
-    ;; and try to match the next term in the poly
-    (t (cons (car p1) (term+poly t1 (cdr p1))))))
+  ;; if the term starts with zero don't bother adding
+  (if (equal 0 (car t1)) 
+    p1 
+    (cond
+      ((null p1) (list t1)) 
+      ;; if the first term of p1 matches t1 add them together
+      ((equal (cdar p1) (cdr t1)) (cons (term+term (car p1) t1) (cdr p1)))
+      ;; if they don't match append the term to the start of the result
+      ;; and try to match the next term in the poly
+      (t (cons (car p1) (term+poly t1 (cdr p1)))))))
 
 ;;; term+term: adds two terms and returns the result
 ;;; N.B. assumes the terms have the same variables
 (defun term+term (t1 t2)
   ;; add the coefficients together and appends the variable to the end
+  ;; if answer starts from zero, just return zero not the variables
   (if (equal 0 (+ (car t1) (car t2))) 
     '(0)
     (cons (+ (car t1) (car t2)) (cdr t1))))
