@@ -2,7 +2,11 @@
 (load "polycalc")
 (use-package :lisp-unit)
 
+(setq *print-failures* t)
+
 (define-test test-poly+ 
-  (assert-equal '((0)) (poly* '((3)) '((3)))))
+  (assert-equal '(()) (poly+ '(()) '(())))
+)
 
 (run-tests :all)
+

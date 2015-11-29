@@ -17,7 +17,7 @@
 ;;; N.B. p1 contains first term of polynomial, p2 contains the remaining terms
 (defun collect-terms (p1 p2)
   (cond 
-    ((null p2) p1)
+    ((null (car p2)) p1)
     ; add terms from p2 to p1
     (t (collect-terms (term+poly (car p2) p1) (cdr p2)))))
 
