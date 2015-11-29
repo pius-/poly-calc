@@ -18,6 +18,7 @@
 (defun collect-terms (p1 p2)
   (cond 
     ((null (car p2)) p1)
+    ((null (car p1)) p2)
     ; add terms from p2 to p1
     (t (collect-terms (term+poly (car p2) p1) (cdr p2)))))
 
