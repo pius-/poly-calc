@@ -109,8 +109,18 @@
   (assert-equal '((2(x 1)(y 2)) (-1(x 1))) (poly- '((1(x 1)(y 2))) '((-1(y 2)(x 1)) (1(x 1)))))
   (assert-equal '() (poly- '((1(x 1)(y 1))) '((1(y 1)(x 1))))))
 
+
+(define-test test-nesting
+  (assert-equal '((10(x 2))) (poly* '((10(x 1)))(poly- '((4(x 1))) (poly+ '((1(x 1))) '((2(x 1)))))))
+  (assert-equal '((12(x 2))) (poly* '((2(x 1)))(poly+ '((4(x 1))) (poly- '((4(x 1))) '((2(x 1)))))))
+  (assert-equal '((12 (x 1))(-8(x 2))) (poly+ '((2(x 1)))(poly- '((10(x 1))) (poly* '((4(x 1))) '((2(x 1)))))))
+  (assert-equal '((2(x 1)) (8(x 2))) (poly+ '((2(x 1)))(poly* '((4(x 1))) (poly- '((4(x 1))) '((2(x 1)))))))
+  (assert-equal '((8(x 1)) (-8(x 2))) (poly- '((10(x 1)))(poly+ '((2(x 1))) (poly* '((4(x 1))) '((2(x 1)))))))
+  (assert-equal '((4(x 1)) (-3.0(x 2))) (poly- '((4(x 1)))(poly* '((0.5(x 1))) (poly+ '((4(x 1))) '((2(x 1))))))))
+
 ;(run-tests '(test-poly+))
 ;(run-tests '(test-poly*))
 ;(run-tests '(test-poly-))
+;(run-tests '(test-nesting))
 
 (run-tests :all)
