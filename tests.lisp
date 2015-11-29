@@ -33,13 +33,10 @@
   (assert-equal '((2(x 1)) (2(y 1))) (poly+ '((1(x 1)) (1(y 1))) '((1(y 1)) (1(x 1)))))
   (assert-equal '((2(x 1)) (1(y 1)) (1(z 1))) (poly+ '((1(x 1)) (1(y 1))) '((1(x 1)) (1(z 1)))))
 
-
-  (assert-equal '((4(x 2)) (3)) (poly+ '((4(x 2))) '((3))))
-  (assert-equal '((3) (4(x 2))) (poly+ '((3)) '((4(x 2)))))
-  (assert-equal '((4(x 2)(y 3)) (3)) (poly+ '((4(x 2)(y 3))) '((3))))
-  (assert-equal '((4(x 2)) (3(y 3))) (poly+ '((2(x 2))) '((2(x 2)) (3(y 3)))))
-  (assert-equal '((2(x 1)) (2(y 1))) (poly+ '((1(x 1)) (1(y 1))) '((1(x 1)) (1(y 1)))))
-)
-
+  (assert-equal '((4(x 1)(z 3)) (5) (2(y 2))) (poly+ '((2(x 1)(z 3)) (3)) '((2(x 1)(z 3)) (2(y 2)) (2))))
+  
+  (assert-equal '((1(x 1)(y 2)) (2(x 1))) (poly+ '((1(x 1)(y 2)) (1(x 1))) '((1(x 1)))))
+  (assert-equal '((1(x 1))) (poly+ '((1(x 1)(y 2))) '((-1(y 2)(x 1)) (1(x 1)))))
+  (assert-equal '((2(x 1)(y 1))) (poly+ '((1(x 1)(y 1))) '((1(y 1)(x 1))))))
 
 (run-tests :all)
