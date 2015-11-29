@@ -17,9 +17,10 @@
 ;;; N.B. p1 contains first term of polynomial, p2 contains the remaining terms
 (defun collect-terms (p1 p2)
   (cond 
-    ((equal 0 (caar p2)) (collect-terms p1 (cdr p2)))
     ((equal 0 (caar p1)) (collect-terms (cdr p1) p2) )
-    (t (cond 
+    ((equal 0 (caar p2)) (collect-terms p1 (cdr p2)))
+    (t (cond
+      ((and (null (car p1)) (null(car p2))) nil) 
       ((null (car p2)) p1)
       ((null (car p1)) p2)
       ; add terms from p2 to p1
@@ -50,7 +51,7 @@
 ;;; poly*: multiplies terms from p1 recursively to all terms in p2
 (defun poly*poly (p1 p2)
   (cond
-    ((null p1) nil)
+    ((or (null (car p1)) (null (car p2))) nil)
     ;; multiply the first term of p1 by p2
     ;; and repeat for the rest of p1
     (t (append (term*poly (car p1) p2) (poly*poly (cdr p1) p2)))))
