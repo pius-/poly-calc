@@ -21,7 +21,6 @@
     ((equal 0 (caar p1)) (collect-terms (cdr p1) p2))
     ((equal 0 (caar p2)) (collect-terms p1 (cdr p2)))
     ((and (null (car p1)) (null(car p2))) nil) 
-    ((null (car p1)) p2)
     ((null (car p2)) p1)
     ;; add terms from p2 to p1
     (t (collect-terms (term+poly (car p2) p1) (cdr p2)))))
