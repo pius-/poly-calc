@@ -46,7 +46,8 @@
   (assert-equal '((1(x 1))) 
     (poly+ '((1(x 1)(y 2))) '((-1(y 2)(x 1)) (1(x 1)))))
   (assert-equal '((2(x 1)(y 1))) 
-    (poly+ '((1(x 1)(y 1))) '((1(y 1)(x 1))))))
+    (poly+ '((1(x 1)(y 1))) '((1(y 1)(x 1)))))
+  (assert-equal '((3(x 1))) (poly+ '((1(x 1)) (1(x 1))) '((1(x 1))))))
 
 
 (define-test test-poly* 
@@ -82,8 +83,8 @@
     (poly* '((1(x 1)(y 2)) (1(x 1))) '((1(x 1)))))
   (assert-equal '((-1(x 2)(y 4)) (1(x 2)(y 2))) 
     (poly* '((1(x 1)(y 2))) '((-1(y 2)(x 1)) (1(x 1)))))
-  (assert-equal '((1(x 2)(y 2))) (poly* '((1(x 1)(y 1))) '((1(y 1)(x 1))))))
-
+  (assert-equal '((1(x 2)(y 2))) (poly* '((1(x 1)(y 1))) '((1(y 1)(x 1)))))
+  (assert-equal '((1(x 6))) (poly* '((1(x 1)(x 2))) '((1(x 3))))))
 
 (define-test test-poly- 
   (assert-equal '() (poly- () ()))
@@ -117,10 +118,17 @@
     (poly- '((1(x 1)(y 2)) (1(x 1))) '((1(x 1)))))
   (assert-equal '((2(x 1)(y 2)) (-1(x 1))) 
     (poly- '((1(x 1)(y 2))) '((-1(y 2)(x 1)) (1(x 1)))))
-  (assert-equal '() (poly- '((1(x 1)(y 1))) '((1(y 1)(x 1))))))
+  (assert-equal '() (poly- '((1(x 1)(y 1))) '((1(y 1)(x 1)))))
+  (assert-equal '((2(x 1))) (poly- '((4(x 1)) (-1(x 1))) '((1(x 1))))))
 
 
 (define-test test-nesting
+  (assert-equal '((16(x 5))) 
+    (poly* '((2(x 1))) (poly* '((2(x 1))) (poly* '((2(x 1))) '((2(x 2)))))))
+  (assert-equal '((6(x 1)) (2(x 2))) 
+    (poly+ '((2(x 1))) (poly+ '((2(x 1))) (poly+ '((2(x 1))) '((2(x 2)))))))
+  (assert-equal '((2(x 1)) (-2(x 2))) 
+    (poly- '((2(x 1))) (poly- '((2(x 1))) (poly- '((2(x 1))) '((2(x 2)))))))
   (assert-equal '((10(x 2))) 
     (poly* '((10(x 1))) (poly- '((4(x 1))) (poly+ '((1(x 1))) '((2(x 1)))))))
   (assert-equal '((12(x 2))) 
